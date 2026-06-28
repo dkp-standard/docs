@@ -1,9 +1,13 @@
 # Domain Knowledge Pack (DKP) Specification
 
 **Version:** 1.0.0
+
 **Status:** Draft 1
+
 **Date:** 2026-06-21
+
 **Author:** Jay Mathis <https://jaymath.is>
+
 **License:** Apache 2.0
 
 ---
