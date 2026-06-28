@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkp-standard.com/dkp/schemas/v1/mcp_tool_eval.json",
+  "title": "eval Tool Input",
+  "type": "object",
+  "required": ["pack", "model"],
+  "properties": {
+    "pack": {
+      "type": "string",
+      "description": "Pack name to evaluate. The pack MUST have expose_eval_cases: true in manifest.json."
+    },
+    "model": {
+      "type": "string",
+      "description": "Model identifier to run the eval against (e.g., \"claude-sonnet-4-6\")"
+    },
+    "sample": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of eval cases to sample randomly. If absent, all cases are run."
+    },
+    "audience": {
+      "type": "string",
+      "description": "Audience profile ID for filtered eval case selection"
+    }
+  }
+}

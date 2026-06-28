@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkp-standard.com/dkp/schemas/v1/manifest.json",
+  "title": "DKP Manifest",
+  "type": "object",
+  "required": ["spec", "name", "version", "domain", "audience", "intended_use", "known_limitations", "update_date", "compatibility"],
+  "properties": {
+    "spec": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+    },
+    "name": { "type": "string", "minLength": 1 },
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+    },
+    "domain": { "type": "string", "minLength": 1 },
+    "audience": { "type": "string", "minLength": 1 },
+    "intended_use": { "type": "string", "minLength": 1 },
+    "known_limitations": { "type": "string", "minLength": 1 },
+    "update_date": { "type": "string", "format": "date" },
+    "source_policy": { "type": "string", "minLength": 1 },
+    "compatibility": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "description": { "type": "string" },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "license": { "type": "string" },
+    "audience_profiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "label": { "type": "string", "minLength": 1 },
+          "requires_role": { "type": "string" }
+        }
+      }
+    },
+    "retrieval_hints": {
+      "type": "object",
+      "properties": {
+        "recommended_top_k": { "type": "integer", "minimum": 1 },
+        "max_context_tokens": { "type": "integer", "minimum": 1 },
+        "use_reranker": { "type": "boolean" },
+        "embedding_model": { "type": "string" },
+        "index_version": { "type": "string" }
+      }
+    },
+    "min_eval_delta": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+    "locales": { "type": "array", "items": { "type": "string" } },
+    "base_locale": { "type": "string" },
+    "publisher": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" },
+        "pgp_fingerprint": { "type": "string" },
+        "signed": { "type": "boolean" }
+      }
+    },
+    "access_control": {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "string",
+          "enum": ["public", "internal", "confidential", "restricted"]
+        },
+        "required_roles": { "type": "array", "items": { "type": "string" } },
+        "export_restrictions": { "type": "array", "items": { "type": "string" } },
+        "encryption_required": { "type": "boolean" },
+        "pii_present": { "type": "boolean" },
+        "gdpr_scope": { "type": "boolean" },
+        "mcp_scopes_required": { "type": "array", "items": { "type": "string" } },
+        "mcp_audience": { "type": "string" }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "version"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "version": { "type": "string", "minLength": 1 },
+          "domain": { "type": "string" },
+          "registry": { "type": "string", "format": "uri" },
+          "optional": { "type": "boolean" }
+        }
+      }
+    },
+    "procedure_capabilities": {
+      "type": "object",
+      "properties": {
+        "sandbox": { "type": "string", "enum": ["wasm", "none"] },
+        "max_runtime_ms": { "type": "integer", "minimum": 1 },
+        "network_access": { "type": "boolean" },
+        "filesystem_access": { "type": "string", "enum": ["none", "read-only", "read-write"] }
+      }
+    },
+    "mcp": {
+      "type": "object",
+      "required": ["enabled"],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "resource_server": {
+          "type": "object",
+          "properties": {
+            "uri_scheme": { "type": "string", "default": "dkp" },
+            "expose_eval_cases": { "type": "boolean", "default": false }
+          }
+        },
+        "tool_provider": {
+          "type": "object",
+          "properties": {
+            "tools": { "type": "array", "items": { "type": "string" } },
+            "auth": {
+              "type": "object",
+              "required": ["scheme"],
+              "properties": {
+                "scheme": { "type": "string", "enum": ["none", "bearer", "oauth2"] },
+                "oauth2": {
+                  "type": "object",
+                  "required": ["authorization_url", "token_url", "scopes"],
+                  "properties": {
+                    "authorization_url": { "type": "string", "format": "uri" },
+                    "token_url": { "type": "string", "format": "uri" },
+                    "scopes": { "type": "array", "items": { "type": "string" } }
+                  }
+                }
+              },
+              "if": { "properties": { "scheme": { "const": "oauth2" } }, "required": ["scheme"] },
+              "then": { "required": ["oauth2"] }
+            }
+          }
+        },
+        "transport": { "type": "string", "enum": ["stdio", "http"], "default": "stdio" }
+      }
+    }
+  }
+}

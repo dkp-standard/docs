@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkp-standard.com/dkp/schemas/v1/mcp_tool_inject.json",
+  "title": "inject Tool Input",
+  "type": "object",
+  "properties": {
+    "scope": {
+      "type": "string",
+      "enum": ["system-prompt", "full", "minimal", "chunks"],
+      "default": "system-prompt",
+      "description": "Content scope to include in the context block."
+    },
+    "format": {
+      "type": "string",
+      "enum": ["markdown", "xml", "json"],
+      "default": "markdown",
+      "description": "Wrapping format for the returned context block."
+    },
+    "max_tokens": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Token budget cap for the returned content."
+    }
+  }
+}

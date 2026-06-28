@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkp-standard.com/dkp/schemas/v1/mcp_tool_list_procedures.json",
+  "title": "list_procedures Tool Input",
+  "type": "object",
+  "properties": {}
+}

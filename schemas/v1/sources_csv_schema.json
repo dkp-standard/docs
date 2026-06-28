@@ -1,0 +1,41 @@
+{
+  "$schema": "https://specs.frictionlessdata.io/schemas/table-schema.json",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string",
+      "description": "Unique source identifier (e.g., src-001). Referenced by source_ref fields throughout the pack.",
+      "constraints": { "required": true }
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "description": "Title of the source document or resource.",
+      "constraints": { "required": true }
+    },
+    {
+      "name": "url",
+      "type": "string",
+      "description": "URL or DOI. Use N/A for offline-only sources.",
+      "constraints": { "required": true }
+    },
+    {
+      "name": "retrieved_date",
+      "type": "date",
+      "format": "%Y-%m-%d",
+      "description": "ISO 8601 date the source was accessed.",
+      "constraints": { "required": true }
+    },
+    {
+      "name": "license",
+      "type": "string",
+      "description": "License of the source (e.g., CC-BY-4.0, Public Domain, All Rights Reserved).",
+      "constraints": { "required": true }
+    },
+    {
+      "name": "notes",
+      "type": "string",
+      "description": "Any relevant notes about the source. MAY be empty."
+    }
+  ]
+}

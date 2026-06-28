@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+
+dotenv: ['.env']
+
+tasks:
+  default:
+    desc: List available tasks
+    cmds:
+      - task --list
+    silent: true
+
+  validate:
+    desc: Validate all docs/schemas/v1/*.json against JSON Schema Draft 2020-12
+    cmds:
+      - python3 utils/validate_schemas.py
+
+  build:
+    desc: Compile SPEC_TEMPLATE.md + sections/ into SPEC.md
+    deps: [validate]
+    cmds:
+      - python3 utils/build_spec.py
+
+  check:
+    desc: Build SPEC.md and verify it matches the committed version
+    deps: [build]
+    cmds:
+      - |
+        git diff --exit-code SPEC.md && echo "OK" || echo "WARN: SPEC.md changed after build"

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkp-standard.com/dkp/schemas/v1/mcp_tool_validate.json",
+  "title": "validate Tool Input",
+  "type": "object",
+  "required": ["pack"],
+  "properties": {
+    "pack": {
+      "type": "string",
+      "description": "Pack name to validate"
+    },
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 8
+      },
+      "description": "Specific gate numbers to run. If absent, all gates are run."
+    },
+    "strict": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, treat SHOULD violations as errors. Default false."
+    }
+  }
+}

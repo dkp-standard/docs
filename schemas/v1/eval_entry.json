@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkp-standard.com/dkp/schemas/v1/eval_entry.json",
+  "title": "DKP Eval Entry",
+  "type": "object",
+  "required": ["query", "expected_dimensions", "critical_must_include", "scoring_rubric", "version_meta"],
+  "properties": {
+    "query": { "type": "string", "minLength": 1 },
+    "expected_dimensions": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "critical_must_include": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "scoring_rubric": { "type": "string", "minLength": 1 },
+    "version_meta": {
+      "type": "object",
+      "required": ["prompt_hash", "model_version", "dataset_version"],
+      "properties": {
+        "prompt_hash": { "type": "string", "minLength": 1 },
+        "model_version": { "type": "string", "minLength": 1 },
+        "dataset_version": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

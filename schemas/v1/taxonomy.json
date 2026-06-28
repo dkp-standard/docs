@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkp-standard.com/dkp/schemas/v1/taxonomy.json",
+  "title": "DKP Taxonomy Alignment",
+  "type": "object",
+  "required": ["mappings"],
+  "properties": {
+    "concept_scheme": {
+      "type": "object",
+      "properties": {
+        "uri": { "type": "string" },
+        "skos_type": { "type": "string" },
+        "dc_title": { "type": "string" },
+        "dc_creator": { "type": "string" }
+      }
+    },
+    "mappings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["dkp_id"],
+        "properties": {
+          "dkp_id": { "type": "string", "minLength": 1 },
+          "skos_exactMatch": { "type": "string" },
+          "skos_closeMatch": { "type": "string" },
+          "schema_org_type": { "type": "string" },
+          "wikidata": { "type": "string" }
+        }
+      }
+    }
+  }
+}

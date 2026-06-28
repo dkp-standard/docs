@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkp-standard.com/dkp/schemas/v1/eval_summary.json",
+  "title": "DKP Eval Summary",
+  "type": "object",
+  "required": ["last_run_date", "pack_version", "model", "mean_delta", "pass_rate", "gate7_pass"],
+  "properties": {
+    "last_run_date": { "type": "string", "format": "date-time" },
+    "pack_version": { "type": "string" },
+    "model": { "type": "string" },
+    "mean_delta": { "type": "number", "minimum": -1.0, "maximum": 1.0 },
+    "pass_rate": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+    "gate7_pass": { "type": "boolean" }
+  }
+}

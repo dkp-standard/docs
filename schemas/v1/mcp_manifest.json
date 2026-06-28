@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkp-standard.com/dkp/schemas/v1/mcp_manifest.json",
+  "title": "DKP MCP Manifest",
+  "type": "object",
+  "required": ["schema_version", "name", "pack_version", "resources", "tools", "generated_at"],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0" },
+    "name": { "type": "string", "minLength": 1 },
+    "pack_version": { "type": "string", "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$" },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["uri", "name", "description", "mime_type"],
+        "properties": {
+          "uri": { "type": "string", "minLength": 1 },
+          "name": { "type": "string", "minLength": 1 },
+          "description": { "type": "string" },
+          "mime_type": { "type": "string" },
+          "total_count": { "type": "integer", "minimum": 0 },
+          "supports_pagination": { "type": "boolean", "description": "Whether this listing resource supports cursor + limit query parameters." }
+        }
+      }
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "description", "inputSchema"],
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "inputSchema": { "type": "object" }
+        }
+      }
+    },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}

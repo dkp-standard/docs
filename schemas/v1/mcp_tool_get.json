@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkp-standard.com/dkp/schemas/v1/mcp_tool_get.json",
+  "title": "get Tool Input",
+  "type": "object",
+  "required": ["asset_type"],
+  "properties": {
+    "asset_type": {
+      "type": "string",
+      "enum": ["term", "rule", "chunk", "constraint", "entity", "eval", "graph", "cross-ref", "system-prompt"],
+      "description": "Asset type to retrieve"
+    },
+    "id": {
+      "type": "string",
+      "description": "Asset ID or title substring to filter by. Omit to get all assets of this type."
+    },
+    "by_id": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, match id exactly instead of substring-matching on title."
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkp-standard.com/dkp/schemas/v1/rules.json",
+  "title": "DKP Rules",
+  "type": "object",
+  "required": ["rules"],
+  "properties": {
+    "rules": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "description", "polarity"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "title": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 1 },
+          "polarity": { "type": "string", "enum": ["affirmative", "prohibitive"] },
+          "source_ref": { "type": "string" },
+          "ttl_days": { "type": "integer", "minimum": 1 },
+          "review_date": { "type": "string", "format": "date" },
+          "stability": { "type": "string", "enum": ["stable", "volatile", "experimental"] },
+          "audience": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "properties": {
+        "rules": {
+          "contains": {
+            "properties": {
+              "polarity": { "const": "affirmative" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "rules": {
+          "contains": {
+            "properties": {
+              "polarity": { "const": "prohibitive" }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

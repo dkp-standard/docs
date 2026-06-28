@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkp-standard.com/dkp/schemas/v1/procedure_schema.json",
+  "title": "Procedure Schema File",
+  "type": "object",
+  "required": ["input_schema", "output_schema"],
+  "properties": {
+    "input_schema": {
+      "type": "object",
+      "description": "JSON Schema defining the procedure's input object."
+    },
+    "output_schema": {
+      "type": "object",
+      "description": "JSON Schema defining the procedure's output object."
+    },
+    "entry_point": {
+      "type": "object",
+      "required": ["filename", "command"],
+      "description": "Required when {procedure-id}.wasm is absent. Declares how to invoke the alternative executable.",
+      "properties": {
+        "filename": {
+          "type": "string",
+          "description": "Exact filename of the alternative executable, including extension (e.g., \"macro_calculator.py\")."
+        },
+        "command": {
+          "type": "string",
+          "description": "Full execution command string (e.g., \"python3 macro_calculator.py\")."
+        }
+      }
+    }
+  }
+}

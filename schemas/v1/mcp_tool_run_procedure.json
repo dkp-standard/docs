@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkp-standard.com/dkp/schemas/v1/mcp_tool_run_procedure.json",
+  "title": "run_procedure Tool Input",
+  "type": "object",
+  "required": ["procedure_id"],
+  "properties": {
+    "procedure_id": {
+      "type": "string",
+      "description": "Procedure ID (stem name, e.g. \"calculate-tdee\")"
+    },
+    "input": {
+      "type": "object",
+      "description": "JSON input passed to the procedure (default: {})"
+    },
+    "timeout_ms": {
+      "type": "integer",
+      "description": "Wall-clock timeout override in milliseconds"
+    }
+  }
+}

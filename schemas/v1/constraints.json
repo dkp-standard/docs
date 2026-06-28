@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkp-standard.com/dkp/schemas/v1/constraints.json",
+  "title": "DKP Constraints",
+  "type": "object",
+  "required": ["edge_cases", "anti_patterns", "hard_limits"],
+  "properties": {
+    "edge_cases": { "$ref": "#/$defs/constraintArray" },
+    "anti_patterns": { "$ref": "#/$defs/constraintArray" },
+    "hard_limits": { "$ref": "#/$defs/constraintArray" }
+  },
+  "$defs": {
+    "constraintArray": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "description"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "title": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 1 },
+          "source_ref": { "type": "string" },
+          "ttl_days": { "type": "integer", "minimum": 1 },
+          "review_date": { "type": "string", "format": "date" },
+          "stability": { "type": "string", "enum": ["stable", "volatile", "experimental"] },
+          "audience": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}
