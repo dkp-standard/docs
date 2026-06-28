@@ -124,7 +124,8 @@ When `tool_provider.auth.scheme` is `"oauth2"`, the `auth.oauth2.scopes` array S
 ```json
 {
   "schema_version": "1.0",
-  "name": "Nutrition for Men",
+  "name": "@example/nutrition-for-men",
+  "title": "Nutrition for Men",
   "pack_version": "0.1.0",
   "resources": [
     {

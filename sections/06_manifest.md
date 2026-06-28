@@ -21,8 +21,8 @@ All fields in this section are REQUIRED. Processors MUST reject (exit non-zero /
 #### `name`
 
 - **Type:** string
-- **Constraints:** Non-empty. Human-readable display name of the pack.
-- **Example:** `"Nutrition for Men"`
+- **Constraints:** Non-empty. Scoped registry identifier for the pack, in the form `@scope/pack-name` (e.g., `"@example/nutrition-for-men"`). MUST be unique within the registry scope. Use `title` for the human-readable display name.
+- **Example:** `"@example/nutrition-for-men"`
 
 #### `version`
 
@@ -69,6 +69,12 @@ All fields in this section are REQUIRED. Processors MUST reject (exit non-zero /
 ### 6.3 Recommended Fields
 
 Fields in this section are RECOMMENDED. Processors SHOULD recognize and surface these fields.
+
+#### `title`
+
+- **Type:** string
+- Human-readable display name of the pack. Shown in search results, registry UI, and documentation. SHOULD be present whenever the pack is published to a registry.
+- **Example:** `"Nutrition for Men"`
 
 #### `source_policy`
 
@@ -208,7 +214,8 @@ The `mcp` block is an advisory manifest. Its presence does not require processor
 
 ```json
 {
-  "name": "Nutrition for Men",
+  "name": "@example/nutrition-for-men",
+  "title": "Nutrition for Men",
   "version": "0.1.0",
   "spec": "1.0.0",
   "domain": "Health",

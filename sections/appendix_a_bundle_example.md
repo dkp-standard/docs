@@ -7,7 +7,8 @@ The following is an illustrative minimal conformant DKP bundle. Content is abbre
 
 ```json
 {
-  "name": "Nutrition for Men",
+  "name": "@example/nutrition-for-men",
+  "title": "Nutrition for Men",
   "version": "0.1.0",
   "spec": "1.0.0",
   "domain": "Health",
@@ -71,7 +72,7 @@ description: The amount of dietary protein an adult man requires per day, expres
 tags: [protein, macronutrients, daily-intake]
 timestamp: "2026-06-21T00:00:00Z"
 dkp_domain: Health
-dkp_pack: Nutrition for Men
+dkp_pack: "@example/nutrition-for-men"
 source_ref: src-001
 stability: stable
 ttl_days: 730

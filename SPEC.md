@@ -300,8 +300,8 @@ All fields in this section are REQUIRED. Processors MUST reject (exit non-zero /
 #### `name`
 
 - **Type:** string
-- **Constraints:** Non-empty. Human-readable display name of the pack.
-- **Example:** `"Nutrition for Men"`
+- **Constraints:** Non-empty. Scoped registry identifier for the pack, in the form `@scope/pack-name` (e.g., `"@example/nutrition-for-men"`). MUST be unique within the registry scope. Use `title` for the human-readable display name.
+- **Example:** `"@example/nutrition-for-men"`
 
 #### `version`
 
@@ -348,6 +348,12 @@ All fields in this section are REQUIRED. Processors MUST reject (exit non-zero /
 ### 6.3 Recommended Fields
 
 Fields in this section are RECOMMENDED. Processors SHOULD recognize and surface these fields.
+
+#### `title`
+
+- **Type:** string
+- Human-readable display name of the pack. Shown in search results, registry UI, and documentation. SHOULD be present whenever the pack is published to a registry.
+- **Example:** `"Nutrition for Men"`
 
 #### `source_policy`
 
@@ -487,7 +493,8 @@ The `mcp` block is an advisory manifest. Its presence does not require processor
 
 ```json
 {
-  "name": "Nutrition for Men",
+  "name": "@example/nutrition-for-men",
+  "title": "Nutrition for Men",
   "version": "0.1.0",
   "spec": "1.0.0",
   "domain": "Health",
@@ -1431,7 +1438,8 @@ When `tool_provider.auth.scheme` is `"oauth2"`, the `auth.oauth2.scopes` array S
 ```json
 {
   "schema_version": "1.0",
-  "name": "Nutrition for Men",
+  "name": "@example/nutrition-for-men",
+  "title": "Nutrition for Men",
   "pack_version": "0.1.0",
   "resources": [
     {
@@ -1497,7 +1505,8 @@ The following is an illustrative minimal conformant DKP bundle. Content is abbre
 
 ```json
 {
-  "name": "Nutrition for Men",
+  "name": "@example/nutrition-for-men",
+  "title": "Nutrition for Men",
   "version": "0.1.0",
   "spec": "1.0.0",
   "domain": "Health",
@@ -1561,7 +1570,7 @@ description: The amount of dietary protein an adult man requires per day, expres
 tags: [protein, macronutrients, daily-intake]
 timestamp: "2026-06-21T00:00:00Z"
 dkp_domain: Health
-dkp_pack: Nutrition for Men
+dkp_pack: "@example/nutrition-for-men"
 source_ref: src-001
 stability: stable
 ttl_days: 730
