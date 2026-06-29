@@ -79,9 +79,12 @@ Processors MUST NOT require the presence of OPTIONAL files. Processors MAY warn 
 A DKP bundle MAY be distributed as:
 
 - A directory tree (e.g., as a Git repository or subdirectory)
-- A `.zip` archive with a SHA-256 checksum file (`{name}-v{version}.zip.sha256`)
+- A `.zip` archive
+- A `.tar.gz` archive
+- A `.tar.xz` archive
+- A `.dkp` archive — the canonical DKP distribution format; equivalent to `.tar.xz` compressed at maximum XZ compression level (preset 9)
 
-Processors MUST support directory trees. Processors SHOULD support `.zip` archives.
+Processors MUST support directory trees. Processors SHOULD support compressed archives. The `.dkp` extension is the RECOMMENDED format for registry publication due to its superior compression ratio.
 
 ### 5.3 Pack Naming
 
